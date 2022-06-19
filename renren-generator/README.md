@@ -1,6 +1,3 @@
-#### 为了项目的长远发展，renren-generator已迁移到 【[renren-security](https://gitee.com/renrenio/renren-security)】里面，以后会在renren-security里面进行更新维护，感谢支持！ :smiley: 
-<br> 
-
 **项目说明** 
 - renren-generator是人人开源项目的代码生成器，可在线生成entity、xml、dao、service、html、js、sql代码，减少70%以上的开发任务
 <br> 

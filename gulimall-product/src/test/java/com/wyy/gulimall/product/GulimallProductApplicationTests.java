@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 @SpringBootTest
 class gulimallProductApplicationTests {
     @Autowired
@@ -19,4 +23,6 @@ class gulimallProductApplicationTests {
         brandService.save(brandEntity);
         System.out.println("保存成功");
     }
+
+
 }

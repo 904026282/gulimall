@@ -17,6 +17,7 @@ import com.wyy.gulimall.product.service.CategoryService;
 import com.wyy.common.utils.PageUtils;
 import com.wyy.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -40,7 +41,7 @@ public class CategoryController {
     public R list(@RequestParam Map<String, Object> params){
         /*PageUtils page = categoryService.queryPage(params);*/
         List<CategoryEntity> list = categoryService.listWithTree();
-        return R.ok().put("page", list);
+        return R.ok().put("data", list);
     }
 
 
@@ -48,11 +49,11 @@ public class CategoryController {
      * 信息
      */
     @RequestMapping("/info/{catId}")
-    ////@RequiresPermissions("product:category:info")
+    // @RequiresPermissions("product:category:info")
     public R info(@PathVariable("catId") Long catId){
-		CategoryEntity category = categoryService.getById(catId);
+        CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().put("data", category);
     }
 
     /**
@@ -72,7 +73,7 @@ public class CategoryController {
     @RequestMapping("/update")
     ////@RequiresPermissions("product:category:update")
     public R update(@RequestBody CategoryEntity category){
-		categoryService.updateById(category);
+		categoryService.updateCascade(category);
 
         return R.ok();
     }
@@ -89,5 +90,17 @@ public class CategoryController {
 
         return R.ok();
     }
+
+    /**
+     * 修改分类
+     */
+    @RequestMapping("/update/sort")
+    // @RequiresPermissions("product:category:update")
+    public R update(@RequestBody CategoryEntity[] category){
+
+        categoryService.updateBatchById(Arrays.asList(category));
+        return R.ok();
+    }
+
 
 }

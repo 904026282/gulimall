@@ -1,9 +1,14 @@
 package com.wyy.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.wyy.gulimall.product.service.CategoryBrandRelationService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +20,7 @@ import com.wyy.gulimall.product.service.BrandService;
 import com.wyy.common.utils.PageUtils;
 import com.wyy.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -29,7 +35,8 @@ import com.wyy.common.utils.R;
 public class BrandController {
     @Autowired
     private BrandService brandService;
-
+    @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
     /**
      * 列表
      */
@@ -58,7 +65,22 @@ public class BrandController {
      */
     @RequestMapping("/save")
    // //@RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
+    public R save(@Valid @RequestBody BrandEntity brand/*, BindingResult result*/){
+ /*       if( result.hasErrors()){
+            Map<String,String> map=new HashMap<>();
+            //1.获取错误的校验结果
+            result.getFieldErrors().forEach((item)->{
+                //获取发生错误时的message
+                String message = item.getDefaultMessage();
+                //获取发生错误的字段
+                String field = item.getField();
+                map.put(field,message);
+            });
+            return R.error(400,"提交的数据不合法").put("data",map);
+        }else {
+
+        }
+*/
 		brandService.save(brand);
 
         return R.ok();
@@ -72,6 +94,9 @@ public class BrandController {
     public R update(@RequestBody BrandEntity brand){
 		brandService.updateById(brand);
 
+        if(StringUtils.isNotEmpty(brand.getName())){
+            categoryBrandRelationService.updateBrand(brand.getBrandId(),brand.getName());
+        }
         return R.ok();
     }
 

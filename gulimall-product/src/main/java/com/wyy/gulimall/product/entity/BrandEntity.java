@@ -5,7 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.wyy.common.valid.ListValue;
 import lombok.Data;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * 品牌
@@ -27,6 +34,7 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 品牌名
 	 */
+	@NotBlank(message = "品牌名不能为空")
 	private String name;
 	/**
 	 * 品牌logo地址
@@ -39,14 +47,17 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 显示状态[0-不显示；1-显示]
 	 */
+	@ListValue(vals = {0,1})
 	private Integer showStatus;
 	/**
 	 * 检索首字母
 	 */
+	@Pattern(regexp = "^[a-zA-z]$",message = "首字母必须是字母")
 	private String firstLetter;
 	/**
 	 * 排序
 	 */
+	@NotNull
 	private Integer sort;
 
 }
