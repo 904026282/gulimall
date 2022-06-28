@@ -10,6 +10,9 @@ spring:
         server-addr: 192.168.48.1:8848
   application:
     name: gulimall-product
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
 # MapperScan
 # sql映射文件位置
 mybatis-plus:

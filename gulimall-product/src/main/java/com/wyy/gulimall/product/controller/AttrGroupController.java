@@ -40,6 +40,7 @@ public class AttrGroupController {
     @Autowired
     AttrAttrgroupRelationService relationService;
 
+
     @PostMapping("/attr/relation")
     public R addRelation(@RequestBody List<AttrGroupRelationVo> vos){
 

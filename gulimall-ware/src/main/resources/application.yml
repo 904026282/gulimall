@@ -8,6 +8,7 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.48.1:8848
+        namespace: 6df3265a-d016-43e1-82b1-1f465ff3dc0f
   application:
     name: gulimall-ware
 # MapperScan
@@ -17,6 +18,8 @@ mybatis-plus:
   global-config:   # 配置每个表的主键自增长
     db-config:
       id-type: auto
-
+logging:
+  level:
+    com.wyy.gulimall.ware: debug
 server:
   port: 11000

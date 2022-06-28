@@ -5,11 +5,7 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wyy.gulimall.coupon.entity.SpuBoundsEntity;
 import com.wyy.gulimall.coupon.service.SpuBoundsService;
@@ -30,6 +26,7 @@ import com.wyy.common.utils.R;
 public class SpuBoundsController {
     @Autowired
     private SpuBoundsService spuBoundsService;
+
 
     /**
      * 列表
@@ -57,10 +54,9 @@ public class SpuBoundsController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
-   // //@RequiresPermissions("coupon:spubounds:save")
+    @PostMapping("/save")
     public R save(@RequestBody SpuBoundsEntity spuBounds){
-		spuBoundsService.save(spuBounds);
+        spuBoundsService.save(spuBounds);
 
         return R.ok();
     }
